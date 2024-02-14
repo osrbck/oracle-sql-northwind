@@ -103,3 +103,79 @@ having count(*) > 3;
 
 --------------------------------------------
 
+select customer_id, company_name, contact_name 
+from customers
+where customer_id in (select customer_id from orders)
+
+-----------------------------------------------------
+
+with dept_costs as 
+(
+   	select department_name, sum(salary) dept_total
+  	from employees emp, departments dep
+  	where emp.department_id = dep.department_id
+  	group by department_name
+),
+avg_costs as 
+(
+  	select sum(dept_total) / count(*) dept_avg 
+  	from dept_costs 
+)
+select * from dept_costs 
+where dept_total > (select dept_avg from avg_costs)
+order by department_name;
+
+--------------------------------------------
+
+
+select customer_id, company_name, contact_name  
+from customers
+where customer_id in
+(
+    select customer_id from orders
+    group by customer_id
+    having count(*) > 10
+)
+
+--------------------------------------------
+
+select c.customer_id, company_name, contact_name, order_count
+from customers c,
+(
+    select customer_id, count(*) as order_count 
+    from orders
+    group by customer_id
+    having count(*) > 10
+) order_info
+where c.customer_id = order_info.customer_id;
+
+--------------------------------------------
+
+select * from employees e 
+where e.employee_id in 
+(
+    select et.employee_id from employee_territories et
+    where et.territory_id in 
+    (
+        select t.territory_id from territories t
+        where t.region_id in
+        (
+            select r.region_id from region r
+            where r.region_description = 'Eastern'
+        )
+    )
+)
+
+--------------------------------------------
+
+select customer_id, order_date, 
+    freight, ship_country
+from orders
+where 1=1
+    and ship_country <> 'Mexico'
+    and freight > all
+(
+    select freight from orders o
+    where o.ship_country = 'Mexico' 
+)
+
