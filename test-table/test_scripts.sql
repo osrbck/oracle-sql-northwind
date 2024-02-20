@@ -50,3 +50,47 @@ VALUES(40, 'Zeki Müren', 2, 85, 'male', 'Conservatory', null);
 INSERT INTO student
 VALUES(41, 'Emel Sayin', 4, 96, DEFAULT, 'Finance', default);
 
+--------------------------------------------
+
+insert into colors
+values ('Red');
+
+insert into colors
+values ('Pink');
+
+insert into colors
+values ('Navy');
+
+update colors set color = 'Midnight Blue' where color = 'Blue';
+
+select * from colors;
+
+Rollback;
+
+----------------------------------------------------
+
+update cars set discount = 1000
+where id = 4;
+
+update cars set brand = 'Mercedes Benz'
+where brand = 'Mercedes'
+
+select * from cars;
+
+COMMIT;
+
+--------------------------------------------
+
+--Session-1
+select * from cars;
+
+update cars set price = 7500 
+where id = 4;
+
+--Session-2
+select * from cars;
+
+update cars set price = 8500 
+where id = 4;
+
+--------------------------------------------
