@@ -94,3 +94,31 @@ update cars set price = 8500
 where id = 4;
 
 --------------------------------------------
+--SAVEPOINT
+--------------------------------------------
+
+update product_segment set discount = discount + 0.08;
+
+update product p set net_price = price - price * (select s.discount from product_segment s where s.id = p.segment_id);
+
+savepoint all_segment; --1.savepoint
+
+update product_segment set discount = discount + 0.15 where segment like '%Luxury%';
+
+update product p set net_price = price - price * (select s.discount from product_segment s where s.id = p.segment_id)
+where p.segment_id in 
+    (select ps.id from product_segment ps where ps.segment like '%Luxury%');
+
+savepoint luxury_segment; --2.savepoint
+
+select sum(net_price) from product;
+
+update product_segment set discount = discount + 0.05 where segment = 'Mass';
+
+update product p set net_price = price - price * (select s.discount from product_segment s where s.id = p.segment_id)
+where p.segment_id in 
+    (select ps.id from product_segment ps where ps.segment = 'Mass');
+
+select sum(net_price) from product;
+
+rollback;
