@@ -122,3 +122,28 @@ where p.segment_id in
 select sum(net_price) from product;
 
 rollback;
+
+--------------------------------------------
+
+create table customers
+( 
+  customer_id number(8) not null,
+  customer_name varchar2(100) not null,
+  address varchar2(200),
+  city varchar2(50),
+  state varchar2(25),
+  zip_code varchar2(10)
+);
+
+--------------------------------------------
+
+CREATE TABLE COURSES
+(
+    COURSE_ID NUMBER,
+    COURSE_NAME VARCHAR2(50),
+    COURSE_INFO VARCHAR2(250),
+    COURSE_DATE DATE,
+    COURSE_CAPACITY INTEGER DEFAULT 20,
+    COURSE_TEACHER VARCHAR2(70) DEFAULT 'not appointed yet'
+)
+
