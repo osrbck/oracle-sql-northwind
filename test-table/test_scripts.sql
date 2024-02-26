@@ -147,3 +147,19 @@ CREATE TABLE COURSES
     COURSE_TEACHER VARCHAR2(70) DEFAULT 'not appointed yet'
 )
 
+--------------------------------------------
+
+create table cars_limited as 
+select id, brand, 
+       price, discount,
+	     (price*0.85) limited_price
+from cars
+where brand = 'BMW';
+
+--------------------------------------------
+
+create table product_with_segment as 
+select pr.id, ps.segment, ps.discount, pr.name, pr.price
+from product pr, product_segment ps
+where pr.segment_id = ps.id;
+
