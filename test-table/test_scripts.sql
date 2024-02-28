@@ -156,10 +156,19 @@ select id, brand,
 from cars
 where brand = 'BMW';
 
+
 --------------------------------------------
 
-create table product_with_segment as 
-select pr.id, ps.segment, ps.discount, pr.name, pr.price
-from product pr, product_segment ps
-where pr.segment_id = ps.id;
+ALTER TABLE CARS ADD (CAR_MODEL VARCHAR2(100 BYTE));
 
+ALTER TABLE CARS MODIFY (DISCOUNT DEFAULT 0);
+
+ALTER TABLE CARS DROP COLUMN CAR_MODEL;
+
+ALTER TABLE CARS RENAME COLUMN CAR_ID TO ID;
+
+ALTER TABLE CARS READ ONLY;
+
+COMMENT ON TABLE CARS IS 'Information about the cars is kept in this table';
+
+COMMENT ON COLUMN CARS.BRAND IS 'Describes the car model';
