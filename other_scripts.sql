@@ -1,5 +1,3 @@
---------------------------------------------
-
 update product p
 set net_price = price - price * 
     (
@@ -26,7 +24,6 @@ where exists
             and p.segment_id = ps.id
     )
 
-
 --------------------------------------------
 
 create table customer_orders as
@@ -43,4 +40,6 @@ select pr.id, ps.segment, ps.discount, pr.name, pr.price
 from product pr, product_segment ps
 where pr.segment_id = ps.id;
 
+--------------------------------------------
 
+comment on column product.net_price is 'The net prices of the products are kept in this column'; 

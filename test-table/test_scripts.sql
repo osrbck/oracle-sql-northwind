@@ -172,3 +172,36 @@ ALTER TABLE CARS READ ONLY;
 COMMENT ON TABLE CARS IS 'Information about the cars is kept in this table';
 
 COMMENT ON COLUMN CARS.BRAND IS 'Describes the car model';
+
+--------------------------------------------
+
+CREATE TABLE STUDENT_TEMP AS SELECT * FROM STUDENT;
+
+ALTER TABLE STUDENT_TEMP DROP COLUMN NAME;
+
+ALTER TABLE STUDENT_TEMP DROP COLUMN EMAIL;
+
+-----------------------------------------------------
+
+create table movieactor
+(
+    movieid int,
+    actorname varchar (70),
+    actorsurname  varchar (70)
+);
+
+alter table movieactor rename to movie_actor;
+
+alter table movie_actor rename column movieid to movie_id;
+alter table movie_actor rename column actorname to actor_name;
+alter table movie_actor rename column actorsurname to actor_surname;
+
+alter table movie_actor add (bday date);
+
+alter table movie_actor add (address varchar2(250));
+
+alter table movie_actor add (city varchar2(50) not null);
+
+alter table movie_actor add (company varchar2(150) default 'Warner Bros');
+
+alter table movie_actor modify (address varchar2(500));
