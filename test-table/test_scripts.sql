@@ -205,3 +205,21 @@ alter table movie_actor add (city varchar2(50) not null);
 alter table movie_actor add (company varchar2(150) default 'Warner Bros');
 
 alter table movie_actor modify (address varchar2(500));
+
+-----------------------------------------------------
+
+create table books
+(
+book_id integer not null,
+book_name varchar2(120) not null,
+author varchar2(100),
+isbn varchar2(40),
+pub_year integer,
+page_num integer
+);
+
+
+alter table books modify author varchar2(100) not null;
+
+insert into books(book_id, book_name, author, isbn, pub_year, page_num)
+values(1, 'Learning Oracle', null, null, 2023, 345);
