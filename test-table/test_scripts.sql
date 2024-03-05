@@ -218,8 +218,36 @@ pub_year integer,
 page_num integer
 );
 
+--or
+insert into books(book_id, book_name, author, isbn, pub_year, page_num)
+values(1, 'Learning Oracle', null, null, 2023, 345);
 
 alter table books modify author varchar2(100) not null;
 
-insert into books(book_id, book_name, author, isbn, pub_year, page_num)
-values(1, 'Learning Oracle', null, null, 2023, 345);
+-----------------------------------------------------
+
+CREATE TABLE PERSONEL_EDU
+(
+  PERSONEL_ID      NUMBER        NOT NULL,   
+  EDUCATION        VARCHAR2(100) NOT NULL,   
+  JOB_STARTED      DATE,
+  JOB_FINISHED     DATE,
+  PERSONEL_TYPE    INTEGER,
+  constraint pe_uc1 unique(personel_id, education)
+);
+
+--or
+create unique index pe_uc1 on personel_edu (personel_id, education)
+
+
+--------------------------------------------
+
+create table permission_types
+(
+  permission_id  integer primary key,
+  info   varchar2(50 byte)
+);
+
+--or
+alter table permission_types
+   add constraint pk_permission primary key (permission_id);
