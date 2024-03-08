@@ -224,6 +224,11 @@ values(1, 'Learning Oracle', null, null, 2023, 345);
 
 alter table books modify author varchar2(100) not null;
 
+insert into books(book_id, book_name, author, isbn, pub_year, page_num)
+values(2, 'Learning PostgreSQL', 'Osman', null, 2023, 345);
+
+alter table books add constraint pk_books primary key (book_id);
+
 -----------------------------------------------------
 
 CREATE TABLE PERSONEL_EDU
@@ -251,3 +256,38 @@ create table permission_types
 --or
 alter table permission_types
    add constraint pk_permission primary key (permission_id);
+
+
+--------------------------------------------
+
+
+select * from customer;
+select * from keeper;
+
+create table customer
+(
+    customer_id number,
+    customer_name varchar(255) not null
+);
+
+alter table customer 
+add constraint pk_customer primary key (customer_id);
+
+create table keeper
+(
+    keeper_id number primary key,
+    customer_id number,
+    keeper_name varchar2(150) not null,
+    constraint fk_customer
+        foreign key(customer_id) 
+        references customer(customer_id)
+);
+
+insert into customer (customer_id, customer_name) values(1, 'Apple'); 
+insert into customer (customer_id, customer_name) values(2, 'Google'); 
+insert into customer (customer_id, customer_name) values(3, 'Amazon'); 
+
+insert into keeper (keeper_id, customer_id, keeper_name) values(1, 1, 'Alex'); 
+insert into keeper (keeper_id, customer_id, keeper_name) values(2, 2, 'Michael'); 
+insert into keeper (keeper_id, customer_id, keeper_name) values(3, 3, 'Jane'); 
+insert into keeper (keeper_id, customer_id, keeper_name) values(4, 3, 'Judi');
