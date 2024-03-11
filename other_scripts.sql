@@ -43,3 +43,49 @@ where pr.segment_id = ps.id;
 --------------------------------------------
 
 comment on column product.net_price is 'The net prices of the products are kept in this column'; 
+
+
+
+--------------------------------------------
+
+create view cust_order_info as
+select 
+    c.customer_id, c.company_name, c.contact_name,
+    o.order_id, o.order_date, o.freight, o.ship_city 
+from customers c, orders o 
+where c.customer_id = o.customer_id 
+
+--DROP VIEW CUST_ORDER_INFO;
+
+--------------------------------------------
+
+create or replace view cust_order_prod_info as
+select 
+    co.customer_id, co.company_name,
+    co.order_date, co.freight, co.ship_city,
+    p.product_name, p.unit_price 
+from 
+    cust_order_info co,
+    order_details od, products p  
+where 1=1 
+    and co.order_id = od.order_id 
+    and p.product_id = od.product_id
+
+    with read only;
+
+
+--------------------------------------------
+
+create view vw_product_grand_lux as
+select id, name, price from product
+where segment_id = 1;
+
+update vw_product_grand_lux 
+set price = price * 1.3;
+
+delete from vw_product_grand_lux
+where id = 11;
+
+insert into vw_product_grand_lux(id, name, price)
+values(21, 'Air Cleaner', 1200);
+

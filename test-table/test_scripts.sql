@@ -291,3 +291,27 @@ insert into keeper (keeper_id, customer_id, keeper_name) values(1, 1, 'Alex');
 insert into keeper (keeper_id, customer_id, keeper_name) values(2, 2, 'Michael'); 
 insert into keeper (keeper_id, customer_id, keeper_name) values(3, 3, 'Jane'); 
 insert into keeper (keeper_id, customer_id, keeper_name) values(4, 3, 'Judi');
+
+
+--------------------------------------------
+
+alter table cars add (segment varchar2(1));
+
+
+alter table cars 
+add constraint ck_cars_segment check (segment in('A','B','C','D','E'));
+
+
+insert into cars values(13,'Bugatti',340000,0,'S');
+
+
+--Disable
+alter table ilcarsler disable constraint fk_cars;
+
+--Enable
+alter table cars enable constraint fk_cars;
+
+
+
+
+
