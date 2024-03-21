@@ -89,3 +89,20 @@ where id = 11;
 insert into vw_product_grand_lux(id, name, price)
 values(21, 'Air Cleaner', 1200);
 
+--------------------------------------------
+
+explain plan for
+select 
+    c.customer_id, c.company_name, c.contact_name,
+    o.order_id,  o.order_date, o.freight, o.ship_city 
+from customers c, orders o 
+where c.customer_id = o.customer_id;
+
+select plan_table_output 
+from table(dbms_xplan.display());
+
+select * from customers where customer_id = 'PARIS';
+
+--------------------------------------------
+
+create index uq_emp_city_postal on employees (city, postal_code);
