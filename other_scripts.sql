@@ -91,6 +91,23 @@ values(21, 'Air Cleaner', 1200);
 
 --------------------------------------------
 
+
+alter table customers add (email varchar2(150));
+
+select 
+    customer_id||'@osrbck.net' as email 
+from customers;
+
+update customers set email = 
+       customer_id||'@osrbck.net';
+
+select * from customers;
+
+create unique index customer_email on customers(email);
+
+
+--------------------------------------------
+
 explain plan for
 select 
     c.customer_id, c.company_name, c.contact_name,
