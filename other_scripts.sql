@@ -123,3 +123,28 @@ select * from customers where customer_id = 'PARIS';
 --------------------------------------------
 
 create index uq_emp_city_postal on employees (city, postal_code);
+
+--------------------------------------------
+
+create sequence sq_shippers
+                increment by 1
+                start with 7
+                maxvalue 9999
+                nocache
+                nocycle;
+                
+                
+insert into shippers
+    values(sq_shippers.nextval, 'Amazon', '1-800-888-8888')
+
+--------------------------------------------
+
+create synonym us for us_states;
+
+select * from us;
+
+create public synonym empter for employee_territories;
+
+drop synonym us;
+
+drop public synonym empter;

@@ -311,7 +311,30 @@ alter table ilcarsler disable constraint fk_cars;
 --Enable
 alter table cars enable constraint fk_cars;
 
+--------------------------------------------
 
+create sequence sq_decrease
+    increment by -2
+    start with 100
+    maxvalue 100;
+    
+select sq_decrease.nextval from dual;
+
+--------------------------------------------
+
+alter table colors add(color_id number);
+
+select * from colors;
+
+create sequence sq_colors
+    increment by 1
+    start with 1
+    nomaxvalue;
+    
+update colors set color_id = sq_colors.nextval;
+
+insert into colors
+    values('Purple',sq_colors.nextval)
 
 
 
