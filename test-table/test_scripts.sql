@@ -337,4 +337,83 @@ insert into colors
     values('Purple',sq_colors.nextval)
 
 
+--------------------------------------------
+
+ALTER SESSION SET TIME_ZONE = '+03:00'
+
+ALTER SESSION SET TIME_ZONE = dbtimezone
+
+ALTER SESSION SET TIME_ZONE = local
+
+ALTER SESSION SET TIME_ZONE = 'Turkey'
+
+--------------------------------------------
+
+SELECT CURRENT_DATE, CURRENT_TIMESTAMP, LOCALTIMESTAMP FROM DUAL;
+
+ALTER SESSION SET TIME_ZONE = '-3:00';
+
+SELECT DBTIMEZONE, SESSIONTIMEZONE FROM DUAL;
+
+--------------------------------------------
+
+create table time_ex
+(
+  time1 timestamp with time zone,
+  time2 timestamp with local time zone,
+  time3 date
+);
+
+insert into time_ex
+values (current_date, current_timestamp + 2, sysdate);
+
+select * from time_ex;
+
+--------------------------------------------
+
+create table ex 
+(
+  ex_id number,  
+  ex_interval interval year(3) to month
+);
+
+insert into ex values (1, interval '6' month);
+insert into ex values (2, interval '-3' month);
+insert into ex values (3, interval '100' year(3));
+insert into ex values (4, '50-10');
+insert into ex values (5, '-1-2');
+
+select trunc(sysdate) present_time, 
+       ex_interval, 
+       trunc(sysdate + ex_interval) attent_time 
+from ex;
+
+--------------------------------------------
+
+create table time_out 
+( 
+  time_id number, 
+  time_interval interval day(2) to second
+);
+
+insert into time_out values (1, '90 00:00:00');
+insert into time_out values (2, interval '6 03:30:16' day to second);
+
+select sysdate, time_interval, (sysdate + time_interval) time_on
+from time_out;
+
+--------------------------------------------
+
+create table interval_ex
+(
+  timey interval year(3) to month
+);
+
+insert into interval_ex values('10-02');
+
+select trunc(sysdate), timey, 
+       trunc(sysdate + timey) result1,
+       trunc(sysdate + to_yminterval('10-02')) result2,
+       trunc(add_months(sysdate, 122)) result3
+from interval_ex;
 
