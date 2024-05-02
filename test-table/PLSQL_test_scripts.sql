@@ -63,15 +63,52 @@ end;
 
 ----------------------------------------------------
 
+declare
+    v_string1 varchar2(50);
+    v_string2 varchar2(50);
+    v_string3 varchar2(50);
+begin
+    v_string1 := 'SARIBACAK';
+    v_string2 := 'Osman';
+    v_string3 := v_string1 || ' ' || v_string2;
+
+    dbms_output.put_line('Name: ' || v_string3);
+end;
+
+----------------------------------------------------
+
+declare
+  v_inter1 interval year to month := '03-02';
+  v_inter2 interval year to month := interval '6' month;
+  v_inter3 interval day to second := '40 10:20:10';
+  v_inter4 interval day to second := interval '5 5:5:5' day to second;
+
+begin
+
+  dbms_output.put_line(to_char(sysdate, 'dd.mm.yyyy hh24:mi:ss'));
+  dbms_output.put_line(sysdate + v_inter1);
+  dbms_output.put_line(sysdate + v_inter2);
+  dbms_output.put_line(to_char(sysdate + v_inter3, 'dd.mm.yyyy hh24:mi:ss'));
+  dbms_output.put_line(to_char(sysdate + v_inter4, 'dd.mm.yyyy hh24:mi:ss'));
+  
+end;
 
 
 ----------------------------------------------------
 
+declare
+    v_date1 date;
+    v_inter1 interval day to second := '40 01:00:00';
 
+begin
 
-----------------------------------------------------
-
-
+    v_date1 := to_date('01.09.’ || to_char(sysdate,'yyyy’) || ' 19:00', 'dd.mm.yyyy hh24:mi');
+    
+    dbms_output.put_line('1. Presentation Date: ' || to_char(v_date1, 'dd.mm.yyyy hh24:mi:ss'));
+    dbms_output.put_line('2. Presentation Date: ' || to_char(v_date1 + v_inter1, 'dd.mm.yyyy hh24:mi:ss'));
+    dbms_output.put_line('3. Presentation Date: ' || to_char(v_date1 + v_inter1 + v_inter1, 'dd.mm.yyyy hh24:mi:ss'));
+  
+end;
 
 ----------------------------------------------------
 
