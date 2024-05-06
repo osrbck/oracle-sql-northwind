@@ -72,7 +72,23 @@ end;
 
 ----------------------------------------------------
 
+VARIABLE b_total number
+BEGIN
+    select sum(p.unit_price) into :b_total from products p;
+END;
+print b_total
+
 ----------------------------------------------------
+
+VARIABLE b_sum number
+VARIABLE b_avg number
+set autoprint on
+DECLARE
+    v_supID number := &supplier_id;
+BEGIN
+    select sum(p.unit_price), avg(p.unit_price) into :b_sum, :b_avg from products p
+    where supplier_id = v_supID;
+END;
 
 ----------------------------------------------------
 
