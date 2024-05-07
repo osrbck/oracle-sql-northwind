@@ -112,6 +112,28 @@ end;
 
 ----------------------------------------------------
 
+declare
+  v_var number;
+  v_str  varchar2(50) := 'You are in the right place for PL/SQL learning';
 
+begin
+  v_var := length(v_str); 
+  v_var := months_between(baslangic_tarihi, bitis_tarihi);
+end;
 
 ----------------------------------------------------
+
+declare
+  v_var number := 1234.567;
+  v_str  varchar2(50) := 'You are in the right place for PL/SQL learning';
+  
+begin
+  dbms_output.put_line(instr(v_str,'SQL')); 
+  dbms_output.put_line(concat('Osman ', 'SARIBACAK')); 
+  dbms_output.put_line(to_char(v_var));
+  dbms_output.put_line(lower(v_str));  
+  dbms_output.put_line(substr(v_str, 8, 7)); 
+  dbms_output.put_line(replace(v_str, 'right', 'wrong'));
+  dbms_output.put_line(round(v_var,2));
+  dbms_output.put_line(last_day(sysdate));  
+end;
