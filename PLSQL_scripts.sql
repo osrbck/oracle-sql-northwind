@@ -92,6 +92,39 @@ END;
 
 ----------------------------------------------------
 
+variable b_country varchar2(20)
+begin
+    select country into :b_country from customers
+    where contact_title = 'Owner';
+end;
+
+select * from customer where country = :b_country;
+
+----------------------------------------------------
+
+variable b_sum_freight number
+set autoprint on
+begin
+    select sum(freight) into :b_sum_freight
+    from orders
+    where ship_city = 'Köln';
+end;
+
+select ship_city, sum(freight) 
+from orders
+group by ship_city
+having sum(freight) > :b_sum_freight;
+
+----------------------------------------------------
+
+select * from v$sql where sql_text like '%city%';
+
+select * from customers where city = :b_city;
+
+----------------------------------------------------
+
+----------------------------------------------------
+
 ----------------------------------------------------
 
 ----------------------------------------------------
