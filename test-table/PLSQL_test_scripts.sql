@@ -137,3 +137,24 @@ begin
   dbms_output.put_line(round(v_var,2));
   dbms_output.put_line(last_day(sysdate));  
 end;
+
+----------------------------------------------------
+
+create sequence sq_temp
+start with 1
+increment by 1;
+
+declare
+    v_seq_number number;
+begin
+    v_seq_number := sq_temp.nextval;
+    dbms_output.put_line('Row Number: ' || v_seq_number);
+end;
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------

@@ -153,6 +153,18 @@ end;
 
 ----------------------------------------------------
 
+create sequence sq_temp
+start with 5
+increment by 1;
+
+declare
+    v_seq_number number;
+begin
+    v_seq_number := sq_temp.nextval;
+    dbms_output.put_line('Row Number: ' || v_seq_number);
+    insert into region values (sq_temp.nextval,'North West');
+end;
+
 ----------------------------------------------------
 
 ----------------------------------------------------
