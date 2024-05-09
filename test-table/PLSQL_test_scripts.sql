@@ -153,6 +153,93 @@ end;
 
 ----------------------------------------------------
 
+declare
+    v_outer varchar2(50) := 'Outer block';
+begin
+    declare
+        v_inner varchar2(50) := 'Inner block';
+    begin
+        dbms_output.put_line(v_inner);
+        dbms_output.put_line(v_outer);
+    end;
+    
+    dbms_output.put_line(v_outer);
+
+end;
+
+----------------------------------------------------
+
+declare
+    v_num1 number := 123;
+    v_num2 number := 456;
+begin
+    declare
+        v_mult number;
+    begin
+        v_mult := v_num1 * v_num2;
+        dbms_output.put_line('Multiplication: ' || v_mult);
+    end;
+    declare
+        v_sum number;
+    begin
+        v_sum := v_num1 + v_num2;
+        dbms_output.put_line('Summation: ' || v_sum);
+    end;
+end;
+
+----------------------------------------------------
+
+declare
+    v_net_price smallint;
+    v_brand varchar2(20) := &brand;
+begin
+
+    declare
+       v_price smallint; 
+       v_discount smallint;   
+    begin
+        select price, discount into v_price, v_discount
+        from cars
+        where brand = v_brand;
+        
+        v_net_price := v_price - v_discount;        
+    end;
+    
+     dbms_output.put_line(v_brand ||'''s net price is: '|| v_net_price);
+end;
+
+----------------------------------------------------
+
+begin <<outer>>
+declare
+    v_country varchar2(50)  := 'Out - USA';
+    v_state varchar2(50) := 'Out - NY';
+begin
+  
+    declare 
+        v_state varchar2(50) := 'In - LA';
+        v_city varchar2(50)  := 'In - Los Angeles';
+    begin
+        dbms_output.put_line(v_country);
+        dbms_output.put_line(v_state);
+        dbms_output.put_line(outer.v_state);
+        dbms_output.put_line(v_city);
+    end;
+    
+end;
+end outer;
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
+----------------------------------------------------
+
 ----------------------------------------------------
 
 ----------------------------------------------------
